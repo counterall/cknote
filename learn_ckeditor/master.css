@@ -1,0 +1,11 @@
+input {
+  max-width: 500px;
+  border-radius: 3px
+}
+
+#wrap {
+  width: 1000px;
+  border: 1px solid red;
+  margin-left: auto;
+  margin-right: auto
+}
