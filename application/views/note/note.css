@@ -93,12 +93,19 @@ body{
   color: white;
 }
 
+.category h2{
+  color: #00A8FF;
+}
+
+.category h4{
+  color: whitesmoke;
+}
 /*styles for right side*/
 
 #popup{
   display: none;
   position: absolute;
-  bottom: 30%;
+  top: 40%;
   left: 50%;
   transform: translate(-50%, -50%);
   z-index: 99999;
@@ -131,7 +138,7 @@ body{
   text-align: center;
 }
 
-.search-area form input{
+#sphinx{
   width: 400px;
   height: 60px;
   font-size: 30px;
@@ -146,25 +153,60 @@ body{
   margin-right: auto;
 }
 
-.list-block{
-  /*padding-bottom: 20px;*/
-}
-
-.list-topic{
-  color: #00A8FF;
+.list-block .list-topic{
+  color: #ec5076;
   background-color: #d4d0d0;
   padding-left: 10px;
 }
 
 .list-content{
-  padding: 30px 50px;
+  padding: 10px 50px;
 }
 
+.list-item{
+  margin-top: 10px;
+  margin-bottom:10px;
+}
+
+.list-item-head{
+  color: #00A8FF;
+  font-weight: bold;
+}
+
+.list-item-content{
+  margin-top: 5px;
+  padding-left: 20px;
+}
+
+.list-item-time{
+  margin-top: 3px;
+}
+
+.item-content, .item-meta, .read-more{
+  display: inline-block;
+}
+
+.item-content{
+  width: 50%;
+}
+
+.item-meta{
+  width: 25%;
+  color: #ec5076;
+  font-weight: bold;
+}
+
+.read-more{
+  width: 25%;
+}
 /*style for the form to create new note*/
 
 .cat-area{
   padding-bottom: 10px;
   border-bottom: 1px solid #999999;
+}
+.create-area .list-topic{
+  color: #00A8FF;
 }
 
 .cat-option, .table-option{
@@ -176,22 +218,26 @@ body{
   color: #00A8FF;
   font-weight: bold;
   display: inline-block;
-  width: 160px;
+  width: 100px;
 }
 
-#old-cats, #old-tabs {
+#old-cats, #old-sub-cats {
   max-width: 500px;
   height: 30px;
   font-size: 15px;
   font-family: monospace, Helvetica, sans-serif;
 }
 
-#new-cat, #new-tab{
+#new-cat, #new-sub-cat, #title{
   width: 250px;
   height: 30px;
   font-size: 15px;
   font-family: monospace, Helvetica, sans-serif;
   padding-left: 10px;
+}
+
+#title{
+  width: 80%;
 }
 
 .create-area{
@@ -234,6 +280,6 @@ body{
   border: 1px solid #00A8FF;
 }
 
-#update, #update-quit{
+#update, #update-quit, #create_more{
   display: none;
 }

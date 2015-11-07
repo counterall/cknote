@@ -22,11 +22,10 @@ $(document).ready(function(){
     $('.create-area, .list-area').slideToggle();
     html_height = $('.right-side').height();
     $('.left-side').height(html_height);
-    $('#new-tab, #new-cat').val('');
+    $('#new-sub-cat, #new-cat, #title').val('');
     editor1.setData('');
-    editor2.setData('');
     $('#create, #create-quit').show();
-    $('#update, #update-quit').hide();
+    $('#update, #update-quit, #create_more').hide();
   });
 
 });

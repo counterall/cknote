@@ -10,6 +10,11 @@ function connectDB($db_name = 'cknote'){
   }
 }
 
+function closeDB(){
+  global $con;
+  $con->close();
+}
+
 function querySql($sql, $return=false){
   global $con;
   if (!$results = $con->query($sql)) {
@@ -32,49 +37,72 @@ function multiQuery($sql, $return=false){
 
 function sanitizeString($sql){
   global $con;
+  $sql = trim($sql);
   $sql = stripslashes($sql);
   return $con->real_escape_string($sql);
 }
 
-function createTableName($cat, $tab){
-  $cat_name = ucfirst(strtolower(trim($cat)));
-  $tab_array = explode(' ', strtolower(trim($tab)));
-  foreach($tab_array as $key => $name){
-    $tab_array[$key] = ucfirst($name);
+function formatCatName($name){
+  $nameArray = explode(' ', $name);
+  foreach ($nameArray as $key => $value) {
+    $nameArray[$key] = ucfirst(strtolower($value));
   }
-
-  return $table_name = $cat_name.'_'.implode('', $tab_array);
+  return $nameToReturn = implode(' ', $nameArray);
 }
 
-function getCatAndTab(){
-  $sql = "SELECT table_name FROM tables WHERE table_schema = 'cknote' AND table_name != 'temp'";
+
+function getCatAndSubCats(){
+  $sql = "SELECT category, sub_cat, GROUP_CONCAT(title) AS titles FROM notes GROUP BY CONCAT(category, sub_cat) ORDER BY category ASC";
   $results = querySql($sql, true);
-  $table_names = [];
+  $categoryArray = [];
   while ($row = $results->fetch_array(MYSQLI_ASSOC)) {
-    $table_names[] = $row['table_name'];
+    $categoryArray[] = $row;
   }
-  $cats = [];
-  foreach ($table_names as $key => $value) {
-    $cats[] = substr($value, 0, strpos($value, '_'));
+
+  $categoryArray2 = [];
+  foreach ($categoryArray as $row => $value) {
+    $categoryArray2[$value['category']][$value['sub_cat']] = $value['titles'];
   }
-  $unique_cats = array_unique($cats);
-  $unique_cats2 = [];
-  foreach ($unique_cats as $key1 => $value1) {
-    foreach ($table_names as $key2 => $value2) {
-      if (preg_match("#^".$value1."\_#", $value2)) {
-        $value2 = substr($value2, strpos($value2, '_')+1);
-        $unique_cats2[$value1][]= $value2;
-        unset($table_names[$key2]);
-      }
+  unset($categoryArray);
+
+  $returnArray = [];
+  foreach ($categoryArray2 as $cat => $sub_cat) {
+    foreach ($sub_cat as $sub_cat => $titles) {
+      $titlesArray = explode(',', $titles);
+      $returnArray[$cat][$sub_cat] = $titlesArray;
     }
   }
-  return $unique_cats2;
+  return $returnArray;
 }
 
-function closeDB(){
+function getRecentUpdateAndMostSearch($update = true){
   global $con;
-  $con->close();
+  if ($update) {
+    $sql = "SELECT category, sub_cat, title, datetime FROM notes ORDER BY datetime DESC LIMIT 3";
+  }else{
+    $sql = "SELECT category, sub_cat, title, visits FROM notes ORDER BY visits DESC, category ASC LIMIT 3";
+  }
+  $results = querySql($sql, TRUE);
+  $tmpArray = [];
+  while ($row = $results->fetch_array(MYSQLI_ASSOC)) {
+    $tmpArray[] = $row;
+  }
+  unset($results);
+  $htmlToReturn = '';
+  foreach ($tmpArray as $key => $value) {
+    $htmlToReturn .= "<div class='list-item'>";
+    $htmlToReturn .= "<div class='list-item-head'>".$value['category']." >>> ".$value['sub_cat']."</div>";
+    if ($update) {
+      $htmlToReturn .= "<div class='list-item-content'><div class='item-content'>".$value['title']."</div><pre class='item-meta'>".$value['datetime']."</pre><div class='read-more'><a href=''>Read More</a></div></div>";
+    }else{
+      $htmlToReturn .= "<div class='list-item-content'><div class='item-content'>".$value['title']."</div><div class='item-meta'>".$value['visits']." Times</div><div class='read-more'><a href=''>Read More</a></div></div>";
+    }
+    $htmlToReturn .= "</div>";
+  }
+  return $htmlToReturn;
 }
 
+
+function getMostSearch(){}
 
 ?>
