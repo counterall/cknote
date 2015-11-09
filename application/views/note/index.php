@@ -22,6 +22,9 @@ closeDB();
     <script type="text/javascript" src='note.js'></script>
     <script type="text/javascript" src='add_ckeditor.js'></script>
     <link rel="stylesheet" href="note.css" media="screen" charset="utf-8">
+    <script src="../../../ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
+  	<!-- <script>hljs.initHighlightingOnLoad();</script> -->
+  	<link href="../../../ckeditor/plugins/codesnippet/lib/highlight/styles/tomorrow-night-eighties.css" rel="stylesheet">
   </head>
   <body>
 
@@ -30,7 +33,7 @@ closeDB();
 
         <div class="logo-area">
           <div class="logo">
-              <a href="#"><img src="../../../assets/img/logo.png" alt="CK Note" /></a>
+              <a href=""><img src="../../../assets/img/logo.png" alt="CK Note" /></a>
           </div>
         </div>
 
@@ -44,10 +47,10 @@ closeDB();
             foreach ($menuHierarchy as $cat => $subcat) {
               $menu .= '<div class="category">';
               $menu .= '<h2>'.$cat.'</h2><ul>';
-              foreach ($subcat as $subcat => $titles) {
+              foreach ($subcat as $subcat => $notes) {
                 $menu .= "<li><h4>$subcat</h4><ul>";
-                foreach ($titles as $title) {
-                  $menu .= "<li>$title</li>";
+                foreach ($notes as $key => $value) {
+                  $menu .= "<li><a onclick='showNote(event, this, 1, 0)' href=''>$value</a></li><span>$key</span>";
                 }
                 $menu .= '</ul></li>';
               }
@@ -62,18 +65,18 @@ closeDB();
         <div id="popup"></div>
         <div class="search-area">
           <form>
-            <input type="text" name="search" id='sphinx' placeholder="Search" value="">
+            <input type="text" name="search" placeholder="Search Note" value="">
           </form>
         </div>
         <div class="list-area">
           <div class="list-block recent-update">
-            <h3 class='list-topic'>Recently Updated</h3>
+            <h2 class='list-topic'>Recently Updated</h2>
             <div class='list-content'>
               <?php echo $recentlyUpdated; ?>
             </div>
           </div>
           <div class="list-block most-searched">
-            <h3 class='list-topic'>Most Searched</h3>
+            <h2 class='list-topic'>Most Searched</h2>
             <div class='list-content'>
               <?php echo $mostSearched; ?>
             </div>
@@ -127,6 +130,38 @@ closeDB();
         			</div>
             </div>
           </form>
+        </div>
+        <div class="show-note-area">
+          <form class='show-note-form'>
+            <h2 class="list-topic note-meta">
+              <span id='note-meta-cat'><a href="#"></a></span>
+              <span id='note-meta-sub-cat'> » <a href="#"></a></span>
+            </h2>
+      			<h2 class='list-topic'>Title</h2>
+      			<input type="text" name="update-note-title" id='update-note-title' value="">
+      			<div id='show-note-title'></div>
+      			<h2 class='list-topic'>Content</h2>
+      			<textarea name="editor2" id='editor2'></textarea>
+      			<div id='show-note-content'></div>
+            <div class="note-id"></div>
+            <div class="from-search"></div>
+      			<div id='show-note-button-area'>
+      				<button type="button" id="inline-edit">Edit</button>
+              <button onclick="updateNote(0);" type="button" id="inline-update">Update</button>
+              <button onclick="updateNote(1);" type="button" id="inline-update-quit">Update and Quit</button>
+              <button type="button" id="inline-back">Back</button>
+              <button type="button" id="inline-cancel">Cancel Update</button>
+      			</div>
+      		</form>
+        </div>
+        <div class="search-results">
+          <div class="list-block">
+            <h2 class='list-topic'>Search Results</h2>
+            <div class="list-content"></div>
+            <div id='search-results-button-area'>
+              <button type="button" id="search-return">Quit Searching</button>
+      			</div>
+          </div>
         </div>
       </div>
     </div>

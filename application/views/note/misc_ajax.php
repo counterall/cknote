@@ -2,9 +2,9 @@
 
 include_once "functions.php";
 
-if (isset($_GET['updateSubCats'])) {
+if (isset($_POST['updateSubCats'])) {
   connectDB();
-  $sql = "SELECT DISTINCT(sub_cat) AS c FROM notes WHERE category = '".$_GET['cat']."' ORDER BY c ASC";
+  $sql = "SELECT DISTINCT(sub_cat) AS c FROM notes WHERE category = '".$_POST['cat']."' ORDER BY c ASC";
   $results = querySql($sql, true);
   closeDB();
   $sub_cats = [];
@@ -19,4 +19,21 @@ if (isset($_GET['updateSubCats'])) {
   echo $subCatsHTML;
 }
 
+if (isset($_POST['id'])) {
+  connectDB();
+  $id = $_POST['id'];
+  if (isset($_POST['visit'])) {
+    $sql = "UPDATE notes SET visits = visits + 1 WHERE id = $id";
+    querySql($sql);
+  }
+  $sql = "SELECT category, sub_cat, title, content FROM notes WHERE id = $id";
+  $result = querySql($sql, true);
+  closeDB();
+  $row = $result->fetch_array(MYSQLI_ASSOC);
+  $data = $row['category']."[separator]";
+  $data .= $row['sub_cat']."[separator]";
+  $data .= $row['title']."[separator]";
+  $data .= $row['content'];
+  echo $data;
+}
 ?>
