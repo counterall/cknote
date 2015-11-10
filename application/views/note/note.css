@@ -166,7 +166,7 @@ body{
 
 .list-block .list-topic{
   color: #ec5076;
-  background-color: #d4d0d0;
+  background-color: whitesmoke;
   padding-left: 10px;
 }
 
@@ -321,7 +321,7 @@ body{
 }
 
 .list-topic.note-meta{
-  background-color: #d4d0d0;
+  background-color: whitesmoke;
 }
 
 .show-note-form textarea{
@@ -342,6 +342,9 @@ body{
   padding-left: 10px;
 }
 
+#show-note-content, #show-note-title{
+  font-family: Times;
+}
 .from-search{
   display: none;
 }

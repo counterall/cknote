@@ -51,6 +51,7 @@ $(document).ready(function(){
       return;
 
     editor2 = CKEDITOR.replace('editor2', {
+      height: 600,
       extraAllowedContent: 'code',
       removePlugins: 'about,find,flash,forms,iframe,image,language,newpage,removeformat,selectall,smiley,specialchar,stylescombo,templates',
       extraPlugins: 'widget,codesnippet',
@@ -238,10 +239,12 @@ function showNote(event, element, menu, visit){
     note_array = data.split('[separator]');
     $('#note-meta-cat a').text(note_array[0]);
     $('#note-meta-sub-cat a').text(note_array[1]);
-    $('#show-note-title').html(note_array[2]);
-    $('#show-note-content').html(note_array[3]);
+    $('#show-note-title').html(note_array[2]).css({'background-color': 'whitesmoke', 'padding': '10px 20px'});
+    $('#show-note-content').html(note_array[3]).css({'background-color': 'whitesmoke', 'padding': '10px 20px'});
     $('.show-note-form .note-id').text(id);
-    $('#show-note-content *').css('padding','5px 0');
+    $('#show-note-content ul').css('padding-left','40px');
+    $('#show-note-content ol').css('list-style-position','inside');
+    $('#show-note-content *').css('margin-bottom','5px');
     $('#show-note-content pre code').each(function(i, block) {
       hljs.highlightBlock(block);
     });

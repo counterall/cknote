@@ -9,13 +9,13 @@ if (isset($_POST['update'])) {
   $result = querySql($sql, TRUE);
   $result = $result->fetch_array(MYSQLI_ASSOC);
   $id = $result['id'];
-  $sql = "UPDATE notes SET content = '$content' WHERE id = $id";
+  $sql = "UPDATE notes SET content = '$content', datetime = NOW() WHERE id = $id";
   querySql($sql);
 }elseif (isset($_POST['edit_update'])) {
   $content = sanitizeString($_POST['content']);
   $title = sanitizeString($_POST['title']);
   $id = $_POST['id'];
-  $sql = "UPDATE notes SET content = '$content', title = '$title' WHERE id = $id";
+  $sql = "UPDATE notes SET content = '$content', title = '$title', datetime = NOW() WHERE id = $id";
   querySql($sql);
 }else{
   $category = formatCatName(sanitizeString($_POST['category']));
