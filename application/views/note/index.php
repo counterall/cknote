@@ -19,8 +19,7 @@ closeDB();
     <title>Private Learning Notes</title>
     <script type="text/javascript" src='../../../ckeditor/jquery.min.js'></script>
     <script src="../../../ckeditor/ckeditor.js"></script>
-    <script type="text/javascript" src='note.js'></script>
-    <script type="text/javascript" src='add_ckeditor.js'></script>
+    <script type="text/javascript" src='note_master.js'></script>
     <link rel="stylesheet" href="note.css" media="screen" charset="utf-8">
     <script src="../../../ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
   	<!-- <script>hljs.initHighlightingOnLoad();</script> -->
