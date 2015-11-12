@@ -3,12 +3,16 @@ var editor1, editor2 = null;
 
 $(document).ready(function(){
   // hide all menu items after loading the page
-  $('.category ul').hide();
+  $('.category > ul').hide();
   // collapse or expand the note categories
-  $('.category').on('click', function(){
-    $(this).find('ul').slideToggle(200);
-    $(this).siblings().find('ul').slideUp(200);
+  $('.category h2').on('click', function(){
+    $(this).siblings().filter('ul').slideToggle(200);
+    $(this).parent().siblings().filter('ul').slideUp(200);
   });
+
+  // $('.category *').on('click', function(e){
+  //   e.stopPropagation();
+  // });
 
   //launch ckeditor for content section of new note
   editor1 = CKEDITOR.replace('editor1', {
