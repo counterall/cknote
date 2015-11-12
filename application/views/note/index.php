@@ -1,12 +1,12 @@
 <?php
 
-include_once "functions.php";
+include_once 'functions.php';
 
 connectDB();
 
 $menuHierarchy = getCatAndSubCats();
 $recentlyUpdated = getRecentUpdateAndMostSearch();
-$mostSearched = getRecentUpdateAndMostSearch(FALSE);
+$mostSearched = getRecentUpdateAndMostSearch(false);
 
 closeDB();
 ?>
@@ -28,35 +28,38 @@ closeDB();
   <body>
 
     <div class="wrapper">
-      <div class="left-side">
+      <div class='left-side-outer'>
+        <div class='left-side-inner'>
+          <div class="left-side">
+            <div class="logo-area">
+              <div class="logo">
+                  <a href=""><img src="../../../assets/img/logo.png" alt="CK Note" /></a>
+              </div>
+            </div>
 
-        <div class="logo-area">
-          <div class="logo">
-              <a href=""><img src="../../../assets/img/logo.png" alt="CK Note" /></a>
-          </div>
-        </div>
+            <div class="create-note">
+              <button type="button" name="create-note" id='create-note'>Create Note</button>
+            </div>
 
-        <div class="create-note">
-          <button type="button" name="create-note" id='create-note'>Create Note</button>
-        </div>
-
-        <div class="menu">
-          <?php
-            $menu = '';
-            foreach ($menuHierarchy as $cat => $subcat) {
-              $menu .= '<div class="category">';
-              $menu .= '<h2>'.$cat.'</h2><ul>';
-              foreach ($subcat as $subcat => $notes) {
-                $menu .= "<li><h4>$subcat</h4><ul>";
-                foreach ($notes as $key => $value) {
-                  $menu .= "<li><a onclick='showNote(event, this, 1, 0)' href=''>$value</a></li><span>$key</span>";
+            <div class="menu">
+              <?php
+                $menu = '';
+                foreach ($menuHierarchy as $cat => $subcat) {
+                    $menu .= '<div class="category">';
+                    $menu .= '<h2>'.$cat.'</h2><ul>';
+                    foreach ($subcat as $subcat => $notes) {
+                        $menu .= "<li><h4>$subcat</h4><ul>";
+                        foreach ($notes as $key => $value) {
+                            $menu .= "<li><a onclick='showNote(event, this, 1, 0)' href=''>$value</a></li><span>$key</span>";
+                        }
+                        $menu .= '</ul></li>';
+                    }
+                    $menu .= '</ul></div>';
                 }
-                $menu .= '</ul></li>';
-              }
-              $menu .='</ul></div>';
-            }
-            echo $menu;
-          ?>
+                echo $menu;
+              ?>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -91,7 +94,7 @@ closeDB();
                   <?php
                     $catOptions = '';
                     foreach ($menuHierarchy as $cat => $subcats) {
-                      $catOptions .= '<option value="'.strtolower($cat).'">'.$cat.'</option>';
+                        $catOptions .= '<option value="'.strtolower($cat).'">'.$cat.'</option>';
                     }
                     echo $catOptions;
                   ?>
@@ -105,7 +108,7 @@ closeDB();
                     $subCatOptions = '';
                     $tmpArray = array_values($menuHierarchy);
                     foreach ($tmpArray[0] as $subcat => $titles) {
-                      $subCatOptions .= '<option value="'.strtolower($subcat).'">'.$subcat.'</option>';
+                        $subCatOptions .= '<option value="'.strtolower($subcat).'">'.$subcat.'</option>';
                     }
                     echo $subCatOptions;
                   ?>
