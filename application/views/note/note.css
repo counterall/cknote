@@ -33,6 +33,7 @@ body{
   color: white;
   padding: 30px;
   position: fixed;
+  overflow: scroll;
 }
 
 .logo-area{
