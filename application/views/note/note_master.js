@@ -6,7 +6,7 @@ $(document).ready(function(){
   $('.category ul').hide();
   // collapse or expand the note categories
   $('.category').on('click', function(){
-    $(this).find('ul').slideDown(200);
+    $(this).find('ul').slideToggle(200);
     $(this).siblings().find('ul').slideUp(200);
   });
 
