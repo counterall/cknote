@@ -138,7 +138,7 @@ closeDB();
             </h2>
       			<h2 class='list-topic'>Title</h2>
       			<input type="text" name="update-note-title" id='update-note-title' value="">
-      			<div id='show-note-title'></div>
+      			<h3 id='show-note-title'></h3>
       			<h2 class='list-topic'>Content</h2>
       			<textarea name="editor2" id='editor2'></textarea>
       			<div id='show-note-content'></div>

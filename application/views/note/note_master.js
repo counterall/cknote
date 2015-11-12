@@ -9,7 +9,7 @@ $(document).ready(function(){
     $(this).find('ul').slideDown(200);
     $(this).siblings().find('ul').slideUp(200);
   });
-  
+
   //launch ckeditor for content section of new note
   editor1 = CKEDITOR.replace('editor1', {
     height: 300,

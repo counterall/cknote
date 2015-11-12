@@ -344,7 +344,13 @@ body{
 
 #show-note-content, #show-note-title{
   font-family: Times;
+  overflow-wrap: break-word;
 }
+
+#show-note-title{
+  color: #ec5076;
+}
+
 .from-search{
   display: none;
 }
