@@ -46,7 +46,7 @@ function sanitizeString($sql){
 function formatCatName($name){
   $nameArray = explode(' ', $name);
   foreach ($nameArray as $key => $value) {
-    $nameArray[$key] = ucfirst($value);
+    $nameArray[$key] = ucfirst(trim($value));
   }
   return $nameToReturn = implode(' ', $nameArray);
 }
