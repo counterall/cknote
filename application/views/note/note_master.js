@@ -7,18 +7,14 @@ $(document).ready(function(){
   // collapse or expand the note categories
   $('.category h2').on('click', function(){
     $(this).siblings().filter('ul').slideToggle(200);
-    $(this).parent().siblings().filter('ul').slideUp(200);
+    $(this).parent().siblings().children('ul').slideUp(200);
   });
-
-  // $('.category *').on('click', function(e){
-  //   e.stopPropagation();
-  // });
 
   //launch ckeditor for content section of new note
   editor1 = CKEDITOR.replace('editor1', {
     height: 300,
     extraAllowedContent: 'code',
-    removePlugins: 'about,find,flash,forms,iframe,image,language,newpage,removeformat,selectall,smiley,specialchar,templates',
+    removePlugins: 'about,find,flash,forms,iframe,language,newpage,removeformat,selectall,smiley,specialchar,templates',
     extraPlugins: 'widget,codesnippet',
     codeSnippet_theme: 'tomorrow-night-eighties'
   });
@@ -92,7 +88,7 @@ $(document).ready(function(){
     editor2 = CKEDITOR.replace('editor2', {
       height: 600,
       extraAllowedContent: 'code',
-      removePlugins: 'about,find,flash,forms,iframe,image,language,newpage,removeformat,selectall,smiley,specialchar,stylescombo,templates',
+      removePlugins: 'about,find,flash,forms,iframe,language,newpage,removeformat,selectall,smiley,specialchar,stylescombo,templates',
       extraPlugins: 'widget,codesnippet',
       codeSnippet_theme: 'tomorrow-night-eighties'
     });
