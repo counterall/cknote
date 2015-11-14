@@ -347,11 +347,11 @@ body{
   margin: 20px auto;
 }
 
-#update-note-title, #editor2{
+#update-note-title, #editor2, #update-note-meta{
   display: none;
 }
 
-#update-note-title{
+#update-note-title, #update-note-meta input{
   width: 80%;
   height: 30px;
   font-size: 15px;

@@ -82,8 +82,9 @@ $(document).ready(function(){
 
   //launch classic ckeditor for content section when view a note
   $('#inline-edit').on('click', function(){
-    if (editor2)
+    if (editor2){
       return;
+    }
 
     editor2 = CKEDITOR.replace('editor2', {
       height: 600,
@@ -94,8 +95,12 @@ $(document).ready(function(){
     });
 
     editor2.setData($('#show-note-content').html());
-    $('#update-note-title').val($('#show-note-title').text()).toggle();
-    $('#show-note-title, #show-note-content').toggle();
+    $('#update-note-cat').val($('#note-meta-cat').text());
+    $('#update-note-sub-cat').val($('#note-meta-sub-cat').text());
+    $('#update-note-meta').show();
+    $('#update-note-title').val($('#show-note-title').text()).show();
+
+    $('#show-note-title, .note-meta, #show-note-content').hide();
     $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').toggle();
   });
 
@@ -105,8 +110,9 @@ $(document).ready(function(){
       editor2.destroy();
       editor2 = null;
     }
-    $('#show-note-title, #show-note-content, #inline-edit, #inline-back').show();
-    $('#update-note-title, #inline-update, #inline-update-quit, #inline-cancel').hide();
+  
+    $('#show-note-title, #show-note-content, .note-meta, #inline-edit, #inline-back').show();
+    $('#update-note-title, #update-note-meta, #inline-update, #inline-update-quit, #inline-cancel').hide();
   });
 
   //quit viewing the current note
@@ -158,6 +164,9 @@ function createNote(quit, update){
   if (update) {
     dataArray = {
       update: 'true',
+      category: category,
+      sub_cat: sub_cat,
+      title: title,
       content: content
     };
     $.post('create_update.php', dataArray, function(data) {
@@ -212,15 +221,19 @@ function createMore(){
 
 //update edited note after opening a old note from 'read more' or menu list
 function updateNote(quit){
+  category = $('#update-note-cat').val();
+  sub_cat = $('#update-note-sub-cat').val();
   title = $('#update-note-title').val();
   content = editor2.getData();
   id = $('.show-note-form .note-id').text();
 
   dataArray = {
+    category: category,
+    sub_cat: sub_cat,
     title: title,
     content: content,
     id: id,
-    edit_update: 'true'
+    update: 'true'
   };
 
   $.post('create_update.php', dataArray, function(data){
@@ -236,7 +249,10 @@ function updateNote(quit){
   });
 
   $('#show-note-content').html(content);
-  $('#show-note-title').html(title);
+  $('#show-note-title').text(title);
+  $('#note-meta-cat').text(category);
+  $('#note-meta-sub-cat').text(sub_cat);
+
   $('#show-note-content pre code').each(function(i, block) {
     hljs.highlightBlock(block);
   });
@@ -246,12 +262,14 @@ function updateNote(quit){
       editor2.destroy();
       editor2 = null;
     }
-    $('#update-note-title, #show-note-title, #show-note-content').toggle();
+    $('#update-note-title, #update-note-meta').hide();
+    $('#show-note-title, #show-note-content, .note-meta').show();
+
     $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').toggle();
   }
 }
 
-//show note detail when click read more button from search results list
+//show note detail when click read more button or menu items
 function showNote(event, element, menu, visit){
   event.preventDefault();
   if (menu) {

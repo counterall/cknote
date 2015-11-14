@@ -136,9 +136,15 @@ closeDB();
         <div class="show-note-area">
           <form class='show-note-form'>
             <h2 class="list-topic note-meta">
-              <span id='note-meta-cat'><a href="#"></a></span>
-              <span id='note-meta-sub-cat'> » <a href="#"></a></span>
+              <span id='note-meta-cat'><a href="#"></a></span><span> » </span>
+              <span id='note-meta-sub-cat'><a href="#"></a></span>
             </h2>
+            <div id="update-note-meta">
+              <h2 class='list-topic'>Category</h2>
+        			<input type="text" name="update-note-cat" id='update-note-cat' value="">
+              <h2 class='list-topic'>Sub-Cat</h2>
+        			<input type="text" name="update-note-sub-cat" id='update-note-sub-cat' value="">
+            </div>
       			<h2 class='list-topic'>Title</h2>
       			<input type="text" name="update-note-title" id='update-note-title' value="">
       			<h3 id='show-note-title'></h3>
