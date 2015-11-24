@@ -12,7 +12,7 @@ $(document).ready(function(){
 
   //launch ckeditor for content section of new note
   editor1 = CKEDITOR.replace('editor1', {
-    height: 300,
+    height: 600,
     extraAllowedContent: 'code',
     removePlugins: 'about,find,flash,forms,iframe,language,newpage,removeformat,selectall,smiley,specialchar,templates',
     extraPlugins: 'widget,codesnippet',
@@ -110,7 +110,7 @@ $(document).ready(function(){
       editor2.destroy();
       editor2 = null;
     }
-  
+
     $('#show-note-title, #show-note-content, .note-meta, #inline-edit, #inline-back').show();
     $('#update-note-title, #update-note-meta, #inline-update, #inline-update-quit, #inline-cancel').hide();
   });
