@@ -129,7 +129,7 @@ closeDB();
                 <button onclick="createNote(0,1)" type="button" id="update">Update</button>
         				<button onclick="createNote(1,1)"type="button" id="update-quit">Update and Quit</button>
         				<button type="button" id="cancel">Back to Homepage</button>
-                <button type="button" id="back_to_search">Back to Search</button>
+                <button type="button" id="back_to_search">Back to Search List</button>
                 <button type="button" id="back_to_last_post">Back to Last Post</button>
         			</div>
             </div>
@@ -158,7 +158,8 @@ closeDB();
       				<button type="button" id="inline-edit">Edit</button>
               <button onclick="updateNote(0);" type="button" id="inline-update">Update</button>
               <button onclick="updateNote(1);" type="button" id="inline-update-quit">Update and Quit</button>
-              <button type="button" id="inline-back">Back</button>
+              <button type="button" id="inline-back-home">Back to Homepage</button>
+              <button type="button" id="inline-back">Back to Search List</button>
               <button type="button" id="inline-cancel">Cancel Update</button>
       			</div>
       		</form>

@@ -158,15 +158,23 @@ $(document).ready(function(){
     $('#update-note-title, #update-note-meta, #inline-update, #inline-update-quit, #inline-cancel').hide();
   });
 
-  //quit viewing the current note
+  //quit viewing the current note and back to search list
   $('#inline-back').on('click', function(){
-    $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').show();
     $('.show-note-area').slideUp();
     if ($('.search-results .list-content').html()) {
       $('.search-results').slideDown();
     }else{
       $('.list-area').slideDown();
     }
+    $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').show();
+  });
+  //quit viewing the current note and back to homepage
+  $('#inline-back-home').on('click', function(){
+    $('.search-results .list-content').html('');
+    $('.search-area input').val('');
+    $('.show-note-area').slideUp();
+    $('.list-area').slideDown();
+    $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').show();
   });
 
   //quit searching note and return to homepage
@@ -181,8 +189,8 @@ $(document).ready(function(){
 
 //quit viewing the current note
 function quitViewingNote(){
-  $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').show();
   $('.show-note-area').slideUp();
+  $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').show();
 }
 
 function createNote(quit, update){
@@ -344,6 +352,11 @@ function showNote(event, element, menu, visit){
       hljs.highlightBlock(block);
     });
     $('#inline-update, #inline-update-quit, #inline-cancel').hide();
+    if ($('.search-results .list-content').html()) {
+      $('#inline-back').show();
+    }else{
+      $('#inline-back').hide();
+    }
     $('.show-note-area').slideDown();
     $('.list-area, .search-results').slideUp();
   });
