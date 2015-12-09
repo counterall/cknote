@@ -3,7 +3,7 @@ var editor1, editor2 = null;
 
 $(document).ready(function(){
   // hide all menu items after loading the page
-  $('.category > ul').hide();
+  $('.category > ul, .create-area, .search-results, .show-note-area').hide();
   // collapse or expand the note categories in menu
   $('.category h2').on('click', function(){
     $(this).siblings().find('ul').hide();
@@ -38,29 +38,63 @@ $(document).ready(function(){
 
   //press create button to create or quit creating new note
   $('#create-note').on('click', function(){
-    if ($('.show-note-area').css('display') === 'block') {
-      quitViewingNote();
-      $('.create-area').slideToggle();
+    if (isVisible('.create-area')) {
+      $('.create-area').slideUp();
+      if (isVisible('#back_to_search')){
+        $('.search-results').slideDown();
+      }else if (isVisible('#back_to_last_post')) {
+        $('.show-note-area').slideDown;
+      }else{
+        $('.list-area').slideUp();
+      }
     }else{
-      $('.create-area, .list-area').slideToggle();
+      $('#create, #create-quit').show();
+      $('#update, #update-quit, #create_more, #back_to_last_post, #back_to_search').hide();
+      if (isVisible('.show-note-area')) {
+        $('.show-note-area').slideUp();
+        $('.create-area').slideDown();
+        $('#back_to_last_post').show();
+      }else if (isVisible('.search-results')) {
+        $('.search-results').slideUp();
+        $('.create-area').slideDown();
+        $('#back_to_search').show();
+      }else{
+        $('.create-area').slideDown();
+        $('.list-area').slideUp();
+      }
+      html_height = $('.right-side').height();
+      $('.left-side').height(html_height);
+      $('#new-sub-cat, #new-cat, #title').val('');
+      editor1.setData('');
     }
-    html_height = $('.right-side').height();
-    $('.left-side').height(html_height);
-    $('#new-sub-cat, #new-cat, #title').val('');
-    editor1.setData('');
-    $('#create, #create-quit').show();
-    $('#update, #update-quit, #create_more').hide();
   });
 
   //press cancel button to quit creating new note
   $('#cancel').on('click', function(){
-    $('.create-area, .list-area').slideToggle();
+    $('.create-area').slideUp();
+    $('.list-area').slideDown();
     html_height = $('.right-side').height();
     $('.left-side').height(html_height);
     $('#new-sub-cat, #new-cat, #title').val('');
     editor1.setData('');
-    $('#create, #create-quit').show();
-    $('#update, #update-quit, #create_more').hide();
+  });
+
+  $('#back_to_search').on('click', function(){
+    $('.create-area').slideUp();
+    $('.search-results').slideDown();
+    html_height = $('.right-side').height();
+    $('.left-side').height(html_height);
+    $('#new-sub-cat, #new-cat, #title').val('');
+    editor1.setData('');
+  });
+
+  $('#back_to_last_post').on('click', function(){
+    $('.create-area').slideUp();
+    $('.show-note-area').slideDown();
+    html_height = $('.right-side').height();
+    $('.left-side').height(html_height);
+    $('#new-sub-cat, #new-cat, #title').val('');
+    editor1.setData('');
   });
 
   //dynamically update search results
@@ -85,7 +119,7 @@ $(document).ready(function(){
     }
   });
 
-  //launch classic ckeditor for content section when view a note
+  //launch classic ckeditor for content section when edit a note
   $('#inline-edit').on('click', function(){
     if (editor2){
       return;
@@ -310,4 +344,12 @@ function showNote(event, element, menu, visit){
     $('.show-note-area').slideDown();
     $('.list-area, .search-results').slideUp();
   });
+}
+
+function isVisible(element){
+  if ($(element).css('display') === 'block') {
+    return true;
+  }else{
+    return false;
+  }
 }

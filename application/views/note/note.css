@@ -271,7 +271,6 @@ body{
 
 .create-area{
   margin-bottom: 30px;
-  display: none;
   width: 85%;
   margin-left: auto;
   margin-right: auto;
@@ -321,7 +320,6 @@ body{
   width: 85%;
   margin-left: auto;
   margin-right: auto;
-  display: none;
 }
 
 #note-meta-cat a, #note-meta-sub-cat a{

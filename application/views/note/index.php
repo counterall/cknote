@@ -128,7 +128,9 @@ closeDB();
         				<button onclick="createNote(1,0)"type="button" id="create-quit">Create and Quit</button>
                 <button onclick="createNote(0,1)" type="button" id="update">Update</button>
         				<button onclick="createNote(1,1)"type="button" id="update-quit">Update and Quit</button>
-        				<button type="button" id="cancel">Cancel</button>
+        				<button type="button" id="cancel">Back to Homepage</button>
+                <button type="button" id="back_to_search">Back to Search</button>
+                <button type="button" id="back_to_last_post">Back to Last Post</button>
         			</div>
             </div>
           </form>
