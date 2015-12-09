@@ -4,8 +4,13 @@ var editor1, editor2 = null;
 $(document).ready(function(){
   // hide all menu items after loading the page
   $('.category > ul').hide();
-  // collapse or expand the note categories
+  // collapse or expand the note categories in menu
   $('.category h2').on('click', function(){
+    $(this).siblings().find('ul').hide();
+    $(this).siblings().filter('ul').slideToggle(200);
+    $(this).parent().siblings().children('ul').slideUp(200);
+  });
+  $('.category h4').on('click', function(){
     $(this).siblings().filter('ul').slideToggle(200);
     $(this).parent().siblings().children('ul').slideUp(200);
   });
