@@ -154,7 +154,6 @@ closeDB();
       			<textarea name="editor2" id='editor2'></textarea>
       			<div id='show-note-content'></div>
             <div class="note-id"></div>
-            <div class="from-search"></div>
       			<div id='show-note-button-area'>
       				<button type="button" id="inline-edit">Edit</button>
               <button onclick="updateNote(0);" type="button" id="inline-update">Update</button>
