@@ -2,6 +2,15 @@
 
 include_once "functions.php";
 
+if (isset($_POST['recentlyUpdated'])) {
+  connectDB();
+  $return_html1 = getRecentUpdateAndMostSearch();
+  $return_html2 = getRecentUpdateAndMostSearch(false);
+  closeDB();
+  $return_html = $return_html1 . 'ckseparator' . $return_html2;
+  echo $return_html;
+}
+
 if (isset($_POST['updateSubCats'])) {
   connectDB();
   $sql = "SELECT DISTINCT(sub_cat) AS c FROM notes WHERE category = '".$_POST['cat']."' ORDER BY c ASC";

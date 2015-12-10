@@ -22,7 +22,6 @@ closeDB();
     <script type="text/javascript" src='note_master.js'></script>
     <link rel="stylesheet" href="note.css" media="screen" charset="utf-8">
     <script src="../../../ckeditor/plugins/codesnippet/lib/highlight/highlight.pack.js"></script>
-  	<!-- <script>hljs.initHighlightingOnLoad();</script> -->
   	<link href="../../../ckeditor/plugins/codesnippet/lib/highlight/styles/tomorrow-night-eighties.css" rel="stylesheet">
   </head>
   <body>
@@ -73,13 +72,13 @@ closeDB();
         <div class="list-area">
           <div class="list-block recent-update">
             <h2 class='list-topic'>Recently Updated</h2>
-            <div class='list-content'>
+            <div class='list-content' id='recentlyUpdated'>
               <?php echo $recentlyUpdated; ?>
             </div>
           </div>
           <div class="list-block most-searched">
             <h2 class='list-topic'>Most Searched</h2>
-            <div class='list-content'>
+            <div class='list-content' id='mostSearched'>
               <?php echo $mostSearched; ?>
             </div>
           </div>

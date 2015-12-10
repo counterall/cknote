@@ -200,6 +200,15 @@ $(document).ready(function(){
   $('#inline-back-home').on('click', function(){
     $('.search-results .list-content').html('');
     $('.search-area input').val('');
+    var dataArray = {
+      recentlyUpdated: 'refresh',
+    };
+    $.post('misc_ajax.php', dataArray, function(data) {
+      var returnArray = data.split('ckseparator');
+      $('#recentlyUpdated').html(returnArray[0]);
+      $('#mostSearched').html(returnArray[1]);
+    });
+
     $('.show-note-area').slideUp();
     $('.list-area').slideDown();
   });
@@ -218,12 +227,6 @@ $(document).ready(function(){
   });
 
 });
-
-//quit viewing the current note
-// function quitViewingNote(){
-//   $('.show-note-area').slideUp();
-//   $('#inline-edit, #inline-back-home, #inline-back-search').show();
-// }
 
 function createNote(quit, update){
   new_cat = $('#new-cat').val();

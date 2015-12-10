@@ -68,13 +68,6 @@ function getCatAndSubCats(){
     $categoryArray2[$value['category']][$value['sub_cat']]= $notes;
   }
   unset($categoryArray);
-
-  // $returnArray = [];
-  // foreach ($categoryArray2 as $cat => $sub_cat) {
-  //   foreach ($sub_cat as $sub_cat => $notes) {
-  //     $returnArray[$cat][$sub_cat] = $titlesArray;
-  //   }
-  // }
   return $categoryArray2;
 }
 
