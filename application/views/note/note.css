@@ -95,6 +95,19 @@ body{
   padding-top: 10px;
 }
 
+.first_cat_txt{
+  color: #00A8FF;
+  font-size: 1.3em;
+  font-weight: bold;
+}
+
+.new_note_icon{
+  color: #ec5076;
+  font-style: italic;
+  font-size: 1em;
+  padding-left: 15px;
+}
+
 .category ul{
   list-style-type: none;
   padding-left: 20px;

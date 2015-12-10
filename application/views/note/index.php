@@ -45,11 +45,11 @@ closeDB();
                 $menu = '';
                 foreach ($menuHierarchy as $cat => $subcat) {
                     $menu .= '<div class="category">';
-                    $menu .= '<h2>'.$cat.'</h2><ul>';
+                    $menu .= '<div class="first_cat"><span class="first_cat_txt">'.$cat.'</span><span class="new_note_icon">NEW!</span></div><ul>';
                     foreach ($subcat as $subcat => $notes) {
                         $menu .= "<li><h4>$subcat</h4><ul>";
-                        foreach ($notes as $key => $value) {
-                            $menu .= "<li><a onclick='showNote(event, this, 1, 0)' href=''>$value</a></li><span>$key</span>";
+                        foreach ($notes as $id => $title) {
+                            $menu .= "<li><a onclick='showNote(event, this, 1, 0)' href=''>$title</a></li><span>$id</span>";
                         }
                         $menu .= '</ul></li>';
                     }
