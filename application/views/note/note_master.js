@@ -138,24 +138,35 @@ $(document).ready(function(){
     });
 
     editor2.setData($('#show-note-content').html());
+    //editing area
     $('#update-note-cat').val($('#note-meta-cat').text());
     $('#update-note-sub-cat').val($('#note-meta-sub-cat').text());
     $('#update-note-meta').show();
     $('#update-note-title').val($('#show-note-title').text()).show();
-
+    //hide elements to show content of a post
     $('#show-note-title, .note-meta, #show-note-content').hide();
-    $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').toggle();
+    //show and hide related buttons
+    $('#inline-back, #inline-back-home, #inline-edit').hide();
+    $('#inline-update, #inline-update-quit, #inline-cancel').show();
   });
 
   //cancel editing the note
   $('#inline-cancel').on('click', function(){
+    //destroy the instance of ckeditor which used to edit main content of a post
     if (editor2){
       editor2.destroy();
       editor2 = null;
     }
-
-    $('#show-note-title, #show-note-content, .note-meta, #inline-edit, #inline-back').show();
-    $('#update-note-title, #update-note-meta, #inline-update, #inline-update-quit, #inline-cancel').hide();
+    //show content of a post
+    $('#show-note-title, #show-note-content, .note-meta').show();
+    //hide inputs area which is used to update meta data of a post
+    $('#update-note-title, #update-note-meta').hide();
+    //show and hide related buttons
+    if ($('.search-results .list-content').html()) {
+      $('#inline-back').show();
+    }
+    $('#inline-edit, #inline-back-home').show();
+    $('#inline-update, #inline-update-quit, #inline-cancel').hide();
   });
 
   //quit viewing the current note and back to search list
