@@ -38,11 +38,11 @@ $(document).ready(function(){
 
   //press create button to create or quit creating new note
   $('#create-note').on('click', function(){
-    if (isVisible('.create-area')) {
+    if ($('.create-area').is(':visible')) {
       $('.create-area').slideUp();
-      if (isVisible('#back_to_search')){
+      if ($('#back_to_search').is(':visible')){
         $('.search-results').slideDown();
-      }else if (isVisible('#back_to_last_post')) {
+      }else if (('#back_to_last_post').is(':visible')) {
         $('.show-note-area').slideDown;
       }else{
         $('.list-area').slideUp();
@@ -50,11 +50,11 @@ $(document).ready(function(){
     }else{
       $('#create, #create-quit').show();
       $('#update, #update-quit, #create_more, #back_to_last_post, #back_to_search').hide();
-      if (isVisible('.show-note-area')) {
+      if ($('.show-note-area').is(':visible')) {
         $('.show-note-area').slideUp();
         $('.create-area').slideDown();
         $('#back_to_last_post').show();
-      }else if (isVisible('.search-results')) {
+      }else if ($('.search-results').is(':visible')) {
         $('.search-results').slideUp();
         $('.create-area').slideDown();
         $('#back_to_search').show();
@@ -360,12 +360,4 @@ function showNote(event, element, menu, visit){
     $('.show-note-area').slideDown();
     $('.list-area, .search-results').slideUp();
   });
-}
-
-function isVisible(element){
-  if ($(element).css('display') === 'block') {
-    return true;
-  }else{
-    return false;
-  }
 }
