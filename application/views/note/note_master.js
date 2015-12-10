@@ -3,7 +3,7 @@ var editor1, editor2 = null;
 
 $(document).ready(function(){
   // hide all menu items after loading the page
-  $('.category > ul, .create-area, .search-results, .show-note-area').hide();
+  $('.category > ul, .create-area, .search-results, .show-note-area, .edit-area').hide();
   // collapse or expand the note categories in menu
   $('.category h2').on('click', function(){
     $(this).siblings().find('ul').hide();
@@ -128,7 +128,7 @@ $(document).ready(function(){
     if (editor2){
       return;
     }
-
+    //create creator instance and initiate it with value
     editor2 = CKEDITOR.replace('editor2', {
       height: 600,
       extraAllowedContent: 'code',
@@ -136,48 +136,65 @@ $(document).ready(function(){
       extraPlugins: 'widget,codesnippet',
       codeSnippet_theme: 'tomorrow-night-eighties'
     });
-
     editor2.setData($('#show-note-content').html());
-    //editing area
+    //replicate the note id to the edit form
+    $('.edit-note-form .note-id').text($('.show-note-form .note-id').text());
+    //prepare meta data of a note to be edited
     $('#update-note-cat').val($('#note-meta-cat').text());
     $('#update-note-sub-cat').val($('#note-meta-sub-cat').text());
     $('#update-note-meta').show();
     $('#update-note-title').val($('#show-note-title').text()).show();
-    //hide elements to show content of a post
-    $('#show-note-title, .note-meta, #show-note-content').hide();
-    //show and hide related buttons
-    $('#inline-back, #inline-back-home, #inline-edit').hide();
-    $('#inline-update, #inline-update-quit, #inline-cancel').show();
+    //hide 'show' page
+    $('.show-note-area').hide();
+    //show edit page
+    $('.edit-area').show();
   });
 
   //cancel editing the note
-  $('#inline-cancel').on('click', function(){
+  $('#inline-cancel-update').on('click', function(){
+    // in case new note is opened during editing, we need to recover the note content
+    if ($('.show-note-form .note-id').text() !== $('.edit-note-form .note-id').text()) {
+      category = $('#update-note-cat').val();
+      sub_cat = $('#update-note-sub-cat').val();
+      title = $('#update-note-title').val();
+      content = editor2.getData();
+      $('#show-note-content').html(content);
+      $('#show-note-title').text(title);
+      $('#note-meta-cat').text(category);
+      $('#note-meta-sub-cat').text(sub_cat);
+      $('.show-note-form .note-id').text($('.edit-note-form .note-id').text());
+      $('#show-note-content pre code').each(function(i, block) {
+        hljs.highlightBlock(block);
+      });
+    }
+
     //destroy the instance of ckeditor which used to edit main content of a post
     if (editor2){
       editor2.destroy();
       editor2 = null;
     }
-    //show content of a post
-    $('#show-note-title, #show-note-content, .note-meta').show();
-    //hide inputs area which is used to update meta data of a post
-    $('#update-note-title, #update-note-meta').hide();
+    //show note page
     //show and hide related buttons
     if ($('.search-results .list-content').html()) {
-      $('#inline-back').show();
+      $('#inline-back-search').show();
+    }else{
+      $('#inline-back-search').hide();
     }
+    $('#inline-back-edit').hide();
     $('#inline-edit, #inline-back-home').show();
-    $('#inline-update, #inline-update-quit, #inline-cancel').hide();
+    $('.show-note-area').show();
+    //hide editing area
+    $('.edit-area').hide();
   });
 
   //quit viewing the current note and back to search list
-  $('#inline-back').on('click', function(){
+  $('#inline-back-search').on('click', function(){
     $('.show-note-area').slideUp();
     if ($('.search-results .list-content').html()) {
       $('.search-results').slideDown();
     }else{
       $('.list-area').slideDown();
     }
-    $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').show();
   });
   //quit viewing the current note and back to homepage
   $('#inline-back-home').on('click', function(){
@@ -185,7 +202,11 @@ $(document).ready(function(){
     $('.search-area input').val('');
     $('.show-note-area').slideUp();
     $('.list-area').slideDown();
-    $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').show();
+  });
+  //quit viewing the current note and back to edit page
+  $('#inline-back-edit').on('click', function(){
+    $('.edit-area').slideDown();
+    $('.show-note-area').slideUp();
   });
 
   //quit searching note and return to homepage
@@ -199,10 +220,10 @@ $(document).ready(function(){
 });
 
 //quit viewing the current note
-function quitViewingNote(){
-  $('.show-note-area').slideUp();
-  $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').show();
-}
+// function quitViewingNote(){
+//   $('.show-note-area').slideUp();
+//   $('#inline-edit, #inline-back-home, #inline-back-search').show();
+// }
 
 function createNote(quit, update){
   new_cat = $('#new-cat').val();
@@ -287,7 +308,7 @@ function updateNote(quit){
   sub_cat = $('#update-note-sub-cat').val();
   title = $('#update-note-title').val();
   content = editor2.getData();
-  id = $('.show-note-form .note-id').text();
+  id = $('.edit-note-form .note-id').text();
 
   dataArray = {
     category: category,
@@ -314,6 +335,7 @@ function updateNote(quit){
   $('#show-note-title').text(title);
   $('#note-meta-cat').text(category);
   $('#note-meta-sub-cat').text(sub_cat);
+  $('.show-note-form .note-id').text($('.edit-note-form .note-id').text());
 
   $('#show-note-content pre code').each(function(i, block) {
     hljs.highlightBlock(block);
@@ -324,16 +346,36 @@ function updateNote(quit){
       editor2.destroy();
       editor2 = null;
     }
-    $('#update-note-title, #update-note-meta').hide();
-    $('#show-note-title, #show-note-content, .note-meta').show();
-
-    $('#inline-edit, #inline-update, #inline-update-quit, #inline-cancel, #inline-back').toggle();
+    if ($('.search-results .list-content').html()) {
+      $('#inline-back-search').show();
+    }else{
+      $('#inline-back-search').hide();
+    }
+    $('.edit-area').hide();
+    $('#inline-back-edit').hide();
+    $('#inline-edit, #inline-back-home').show();
+    $('.show-note-area').show();
   }
 }
 
 //show note detail when click read more button or menu items
 function showNote(event, element, menu, visit){
   event.preventDefault();
+
+  if ($('.search-results .list-content').html()) {
+    $('#inline-back-search').show();
+  }else{
+    $('#inline-back-search').hide();
+  }
+  if ($('.edit-area').is(':visible')) {
+    $('.edit-area').slideUp();
+    $('#inline-back-edit').show();
+    $('#inline-edit, #inline-back-home, #inline-back-search').hide();
+  }else{
+    $('#inline-back-edit').hide();
+    $('#inline-edit, #inline-back-home').show();
+  }
+
   if (menu) {
     id = $(element).parent().next().text();
   }else{
@@ -362,12 +404,7 @@ function showNote(event, element, menu, visit){
     $('#show-note-content pre code').each(function(i, block) {
       hljs.highlightBlock(block);
     });
-    $('#inline-update, #inline-update-quit, #inline-cancel').hide();
-    if ($('.search-results .list-content').html()) {
-      $('#inline-back').show();
-    }else{
-      $('#inline-back').hide();
-    }
+
     $('.show-note-area').slideDown();
     $('.list-area, .search-results').slideUp();
   });

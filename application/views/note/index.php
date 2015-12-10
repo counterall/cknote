@@ -122,15 +122,15 @@ closeDB();
               <input type="text" name="title" id='title' value="">
         			<h2 class='list-topic'>Content</h2>
         			<textarea name="editor1" id='editor1'></textarea>
-        			<div class='button-area'>
-        				<button onclick="createNote(0,0)" type="button" id="create">Create</button>
-                <button onclick="createMore()" type="button" id="create_more">Create Another?</button>
-        				<button onclick="createNote(1,0)"type="button" id="create-quit">Create and Quit</button>
-                <button onclick="createNote(0,1)" type="button" id="update">Update</button>
-        				<button onclick="createNote(1,1)"type="button" id="update-quit">Update and Quit</button>
-        				<button type="button" id="cancel">Back to Homepage</button>
-                <button type="button" id="back_to_search">Back to Search List</button>
-                <button type="button" id="back_to_last_post">Back to Last Post</button>
+        			<div id='create-note-button-area'>
+        				<button onclick="createNote(0,0)" type="button" class='button' id="create">Create</button>
+                <button onclick="createMore()" type="button" class='button' id="create_more">Create Another?</button>
+        				<button onclick="createNote(1,0)"type="button" class='button' id="create-quit">Create and Quit</button>
+                <button onclick="createNote(0,1)" type="button" class='button' id="update">Update</button>
+        				<button onclick="createNote(1,1)"type="button" class='button' id="update-quit">Update and Quit</button>
+        				<button type="button" class='button' id="cancel">Back to Homepage</button>
+                <button type="button" class='button' id="back_to_search">Back to Search List</button>
+                <button type="button" class='button' id="back_to_last_post">Back to Last Post</button>
         			</div>
             </div>
           </form>
@@ -141,26 +141,16 @@ closeDB();
               <span id='note-meta-cat'><a href="#"></a></span><span> » </span>
               <span id='note-meta-sub-cat'><a href="#"></a></span>
             </h2>
-            <div id="update-note-meta">
-              <h2 class='list-topic'>Category</h2>
-        			<input type="text" name="update-note-cat" id='update-note-cat' value="">
-              <h2 class='list-topic'>Sub-Cat</h2>
-        			<input type="text" name="update-note-sub-cat" id='update-note-sub-cat' value="">
-            </div>
       			<h2 class='list-topic'>Title</h2>
-      			<input type="text" name="update-note-title" id='update-note-title' value="">
       			<h3 id='show-note-title'></h3>
       			<h2 class='list-topic'>Content</h2>
-      			<textarea name="editor2" id='editor2'></textarea>
       			<div id='show-note-content'></div>
             <div class="note-id"></div>
       			<div id='show-note-button-area'>
-      				<button type="button" id="inline-edit">Edit</button>
-              <button onclick="updateNote(0);" type="button" id="inline-update">Update</button>
-              <button onclick="updateNote(1);" type="button" id="inline-update-quit">Update and Quit</button>
-              <button type="button" id="inline-back-home">Back to Homepage</button>
-              <button type="button" id="inline-back">Back to Search List</button>
-              <button type="button" id="inline-cancel">Cancel Update</button>
+      				<button type="button" class='button' id="inline-edit">Edit</button>
+              <button type="button" class='button' id="inline-back-home">Back to Homepage</button>
+              <button type="button" class='button' id="inline-back-search">Back to Search List</button>
+              <button type="button" class='button' id="inline-back-edit">Back to  Edit</button>
       			</div>
       		</form>
         </div>
@@ -169,10 +159,32 @@ closeDB();
             <h2 class='list-topic'>Search Results</h2>
             <div class="list-content"></div>
             <div id='search-results-button-area'>
-              <button type="button" id="search-return">Quit Searching</button>
+              <button type="button" class='button' id="search-return">Quit Searching</button>
       			</div>
           </div>
         </div>
+
+        <div class="edit-area">
+          <form class="edit-note-form">
+            <div id="update-note-meta">
+              <h2 class='list-topic'>Category</h2>
+              <input type="text" name="update-note-cat" id='update-note-cat' value="">
+              <h2 class='list-topic'>Sub-Cat</h2>
+              <input type="text" name="update-note-sub-cat" id='update-note-sub-cat' value="">
+            </div>
+            <h2 class='list-topic'>Title</h2>
+            <input type="text" name="update-note-title" id='update-note-title' value="">
+            <h2 class='list-topic'>Content</h2>
+            <textarea name="editor2" id='editor2'></textarea>
+            <div class="note-id"></div>
+            <div id='edit-note-button-area'>
+      				<button onclick="updateNote(0);" type="button" class='button' id="inline-update">Update</button>
+              <button onclick="updateNote(1);" type="button" class='button' id="inline-update-quit">Update and Quit Editing</button>
+              <button type="button" class='button' id="inline-cancel-update">Cancel Updating</button>
+      			</div>
+          </form>
+        </div>
+
       </div>
     </div>
 

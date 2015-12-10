@@ -291,12 +291,12 @@ body{
   margin: 20px auto;
 }
 
-.button-area, #show-note-button-area{
+#create-note-button-area, #show-note-button-area, #edit-note-button-area{
   margin-top: 20px;
   /*text-align: center;*/
 }
 
-.button-area button, #show-note-button-area button, #search-results-button-area button{
+.button{
   max-width: 300px;
   height: 30px;
   padding-left: 20px;
@@ -315,7 +315,7 @@ body{
 }
 
 /**************************styles for indiviual note************************/
-.show-note-area, .search-results{
+.show-note-area, .edit-area, .search-results{
   margin-bottom: 30px;
   width: 85%;
   margin-left: auto;
@@ -327,7 +327,7 @@ body{
   color: #ec5076;
 }
 
-.show-note-form .list-topic{
+.show-note-form .list-topic, .edit-area .list-topic{
   margin-bottom: 10px;
   margin-top: 10px;
   padding-left: 0;
@@ -339,7 +339,7 @@ body{
   background-color: whitesmoke;
 }
 
-.show-note-form textarea{
+.edit-note-form textarea{
   display: none;
   width: 90%;
   margin: 20px auto;
