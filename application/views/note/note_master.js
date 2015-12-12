@@ -72,6 +72,7 @@ $(document).ready(function(){
   //press cancel button to quit creating new note
   $('#cancel').on('click', function(){
     $('.create-area').slideUp();
+    refreshFrontpage();
     $('.list-area').slideDown();
     html_height = $('.right-side').height();
     $('.left-side').height(html_height);
@@ -193,6 +194,7 @@ $(document).ready(function(){
     if ($('.search-results .list-content').html()) {
       $('.search-results').slideDown();
     }else{
+      refreshFrontpage();
       $('.list-area').slideDown();
     }
   });
@@ -200,16 +202,8 @@ $(document).ready(function(){
   $('#inline-back-home').on('click', function(){
     $('.search-results .list-content').html('');
     $('.search-area input').val('');
-    var dataArray = {
-      recentlyUpdated: 'refresh',
-    };
-    $.post('misc_ajax.php', dataArray, function(data) {
-      var returnArray = data.split('ckseparator');
-      $('#recentlyUpdated').html(returnArray[0]);
-      $('#mostSearched').html(returnArray[1]);
-    });
-
     $('.show-note-area').slideUp();
+    refreshFrontpage();
     $('.list-area').slideDown();
   });
   //quit viewing the current note and back to edit page
@@ -223,6 +217,7 @@ $(document).ready(function(){
     $('.search-results .list-content').html('');
     $('.search-area input').val('');
     $('.search-results').slideUp();
+    refreshFrontpage();
     $('.list-area').slideDown();
   });
 
@@ -410,5 +405,16 @@ function showNote(event, element, menu, visit){
 
     $('.show-note-area').slideDown();
     $('.list-area, .search-results').slideUp();
+  });
+}
+
+function refreshFrontpage(){
+  var dataArray = {
+    recentlyUpdated: 'refresh',
+  };
+  $.post('misc_ajax.php', dataArray, function(data) {
+    var returnArray = data.split('ckseparator');
+    $('#recentlyUpdated').html(returnArray[0]);
+    $('#mostSearched').html(returnArray[1]);
   });
 }
