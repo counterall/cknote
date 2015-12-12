@@ -211,6 +211,11 @@ $(document).ready(function(){
     $('.edit-area').slideDown();
     $('.show-note-area').slideUp();
   });
+  //quit viewing the current note and back to create note
+  $('#inline-back-create').on('click', function(){
+    $('.create-area').slideDown();
+    $('.show-note-area').slideUp();
+  });
 
   //quit searching note and return to homepage
   $('#search-return').on('click', function(){
@@ -359,18 +364,19 @@ function updateNote(quit){
 //show note detail when click read more button or menu items
 function showNote(event, element, menu, visit){
   event.preventDefault();
+  $('#show-note-button-area > button').hide();
 
-  if ($('.search-results .list-content').html()) {
-    $('#inline-back-search').show();
-  }else{
-    $('#inline-back-search').hide();
-  }
   if ($('.edit-area').is(':visible')) {
     $('.edit-area').slideUp();
     $('#inline-back-edit').show();
-    $('#inline-edit, #inline-back-home, #inline-back-search').hide();
+  }else if ($('.create-area').is(':visible')) {
+    $('.create-area').slideUp();
+    $('#inline-back-create').show();
+  }else if ($('.search-results .list-content').html()) {
+      $('.search-results').slideUp();
+      $('#inline-back-search, #inline-edit, #inline-back-home').show();
   }else{
-    $('#inline-back-edit').hide();
+    $('.list-area').slideUp();
     $('#inline-edit, #inline-back-home').show();
   }
 
@@ -402,10 +408,9 @@ function showNote(event, element, menu, visit){
     $('#show-note-content pre code').each(function(i, block) {
       hljs.highlightBlock(block);
     });
-
-    $('.show-note-area').slideDown();
-    $('.list-area, .search-results').slideUp();
   });
+
+  $('.show-note-area').slideDown();
 }
 
 function refreshFrontpage(){

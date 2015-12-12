@@ -150,6 +150,7 @@ closeDB();
               <button type="button" class='button' id="inline-back-home">Back to Homepage</button>
               <button type="button" class='button' id="inline-back-search">Back to Search List</button>
               <button type="button" class='button' id="inline-back-edit">Back to  Edit</button>
+              <button type="button" class='button' id="inline-back-create">Continue Creating</button>
       			</div>
       		</form>
         </div>
