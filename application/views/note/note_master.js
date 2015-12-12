@@ -3,14 +3,14 @@ var editor1, editor2 = null;
 
 $(document).ready(function(){
   // hide all menu items after loading the page
-  $('.category > ul, .create-area, .search-results, .show-note-area, .edit-area, .new_note_icon').hide();
+  $('.menu-sub-cat-block, .create-area, .search-results, .show-note-area, .edit-area, .new_note_icon').hide();
   // collapse or expand the note categories in menu
   $('.first_cat').on('click', function(){
     $(this).siblings().find('ul').hide();
     $(this).siblings().filter('ul').slideToggle(200);
     $(this).parent().siblings().children('ul').slideUp(200);
   });
-  $('.category h4').on('click', function(){
+  $('.menu-sub-cat').on('click', function(){
     $(this).siblings().filter('ul').slideToggle(200);
     $(this).parent().siblings().children('ul').slideUp(200);
   });

@@ -97,45 +97,44 @@ body{
 
 .first_cat_txt{
   color: #00A8FF;
-  font-size: 1.3em;
+  font-size: 1.2em;
   font-weight: bold;
 }
 
 .new_note_icon{
   color: #ec5076;
   font-style: italic;
-  font-size: 1em;
   padding-left: 15px;
 }
 
-.category ul{
+.menu-sub-cat-block, .menu-note-title-block{
   list-style-type: none;
-  padding-left: 20px;
+  padding-left: 10px;
 }
 
-.category ul li {
+.menu-sub-cat-block>li, .menu-note-title-block>li {
   padding-top: 10px;
 }
 
-.category ul li:hover{
-  color: white;
+.menu-sub-cat{
+  color: #e5e1ed;
 }
 
-.category ul li a{
-  text-decoration: none;
-  color: #999999;
+.menu-note-title-block>li>a:hover{
+  font-size: 1em;
+  color: #ec5076;
 }
-.category ul li span{
+
+.menu-note-title-block>li>a{
+  text-decoration: none;
+  font-size: 0.9em;
+  color: #c9c7c7;
+}
+.menu-note-title-block>span{
   display: none;
 }
 
-.category h2{
-  color: #00A8FF;
-}
 
-.category h4{
-  color: whitesmoke;
-}
 
 /*************************styles for right side**************************/
 
@@ -372,6 +371,7 @@ body{
 
 #show-note-content, #show-note-title{
   font-family: Times;
+  overflow: auto;
   overflow-wrap: break-word;
 }
 
