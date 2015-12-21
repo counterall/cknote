@@ -374,6 +374,9 @@ body{
   overflow: auto;
   overflow-wrap: break-word;
 }
+#show-note-content ol{
+  padding-left: 20px;
+}
 
 #show-note-title{
   color: #ec5076;
