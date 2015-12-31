@@ -121,7 +121,7 @@ body{
 }
 
 .menu-note-title-block>li>a:hover{
-  font-size: 1em;
+  /*font-size: 1em;*/
   color: #ec5076;
 }
 

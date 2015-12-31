@@ -97,7 +97,7 @@ closeDB();
                     }
                     echo $catOptions;
                   ?>
-                </select> Or
+                </select> OR
                 <input type="text" id='new-cat' name="new-cat" placeholder="Create New Category">
               </p>
               <p class='table-option'>

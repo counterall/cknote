@@ -153,21 +153,23 @@ $(document).ready(function(){
 
   //cancel editing the note
   $('#inline-cancel-update').on('click', function(){
-    // in case new note is opened during editing, we need to recover the note content
-    if ($('.show-note-form .note-id').text() !== $('.edit-note-form .note-id').text()) {
-      category = $('#update-note-cat').val();
-      sub_cat = $('#update-note-sub-cat').val();
-      title = $('#update-note-title').val();
-      content = editor2.getData();
-      $('#show-note-content').html(content);
-      $('#show-note-title').text(title);
-      $('#note-meta-cat').text(category);
-      $('#note-meta-sub-cat').text(sub_cat);
-      $('.show-note-form .note-id').text($('.edit-note-form .note-id').text());
-      $('#show-note-content pre code').each(function(i, block) {
-        hljs.highlightBlock(block);
-      });
-    }
+    //recover the note content from edit form
+    category = $('#update-note-cat').val();
+    sub_cat = $('#update-note-sub-cat').val();
+    title = $('#update-note-title').val();
+    content = editor2.getData();
+    $('#show-note-content').html(content);
+    $('#show-note-title').text(title);
+    $('#note-meta-cat').text(category);
+    $('#note-meta-sub-cat').text(sub_cat);
+    // in case new note is opened during editing, we need to recover the note id
+    $('.show-note-form .note-id').text($('.edit-note-form .note-id').text());
+    $('#show-note-content ul').css('padding-left','40px');
+    $('#show-note-content ol').css('list-style-position','inside');
+    $('#show-note-content *').css('margin-bottom','5px');
+    $('#show-note-content pre code').each(function(i, block) {
+      hljs.highlightBlock(block);
+    });
 
     //destroy the instance of ckeditor which used to edit main content of a post
     if (editor2){
@@ -338,8 +340,11 @@ function updateNote(quit){
   $('#show-note-title').text(title);
   $('#note-meta-cat').text(category);
   $('#note-meta-sub-cat').text(sub_cat);
+  // in case new note is opened during editing, we need to recover the note id
   $('.show-note-form .note-id').text($('.edit-note-form .note-id').text());
-
+  $('#show-note-content ul').css('padding-left','40px');
+  $('#show-note-content ol').css('list-style-position','inside');
+  $('#show-note-content *').css('margin-bottom','5px');
   $('#show-note-content pre code').each(function(i, block) {
     hljs.highlightBlock(block);
   });
