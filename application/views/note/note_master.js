@@ -21,7 +21,8 @@ $(document).ready(function(){
     extraAllowedContent: 'code',
     removePlugins: 'about,find,flash,forms,iframe,language,newpage,removeformat,selectall,smiley,specialchar,templates',
     extraPlugins: 'widget,codesnippet',
-    codeSnippet_theme: 'tomorrow-night-eighties'
+    codeSnippet_theme: 'tomorrow-night-eighties',
+    stylesSet: 'my_styles:/cknote/application/views/note/ckeditor_style.js'
   });
 
   //dynamiclly update the sub-categories when specific category is selected
@@ -133,9 +134,10 @@ $(document).ready(function(){
     editor2 = CKEDITOR.replace('editor2', {
       height: 600,
       extraAllowedContent: 'code',
-      removePlugins: 'about,find,flash,forms,iframe,language,newpage,removeformat,selectall,smiley,specialchar,stylescombo,templates',
+      removePlugins: 'about,find,flash,forms,iframe,language,newpage,removeformat,selectall,smiley,specialchar,templates',
       extraPlugins: 'widget,codesnippet',
-      codeSnippet_theme: 'tomorrow-night-eighties'
+      codeSnippet_theme: 'tomorrow-night-eighties',
+      stylesSet: 'my_styles:/cknote/application/views/note/ckeditor_style.js'
     });
     editor2.setData($('#show-note-content').html());
     //replicate the note id to the edit form
