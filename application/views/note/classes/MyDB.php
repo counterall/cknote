@@ -8,7 +8,7 @@ class MyDB {
   private $db;
   private $port;
 
-  public function __construct($host='localhost', $username='root', $passwd='', $db='', $port=3306){
+  public function __construct($host, $username, $passwd, $db, $port=3306){
     $this->host = $host;
     $this->username = $username;
     $this->passwd = $passwd;
@@ -20,16 +20,19 @@ class MyDB {
     }
   }
 
+  //destory current database connection object
   public function close(){
     $this->connection->close();
   }
 
+  //sanitize input query string
   private function sanitizeQuery($sql){
     $sql = trim($sql);
     $sql = stripslashes($sql);
     return $sql;
   }
 
+  //single sql query which returns resultsets
   public function getQuery($sql, $returnType=MYSQLI_ASSOC){
     $sql = $this->sanitizeQuery($sql);
     $sql = $this->connection->real_escape_string($sql);
@@ -45,6 +48,7 @@ class MyDB {
     }
   }
 
+  //single sql query which does not return resultsets
   public function setQuery($sql){
     $sql = $this->sanitizeQuery($sql);
     $sql = $this->connection->real_escape_string($sql);
@@ -53,6 +57,7 @@ class MyDB {
     }
   }
 
+  //multiple sql queries which return resultsets
   public function getMultiQuery($sql, $returnType=MYSQLI_ASSOC){
     $sql = $this->sanitizeQuery($sql);
     $sql = $this->connection->real_escape_string($sql);
@@ -93,6 +98,21 @@ class MyDB {
       return $return;
     }else{
       die("No results found!\n");
+    }
+  }
+
+  //for sphinx search only
+  public function getSphinxMatches($sql, $returnType=MYSQLI_ASSOC){
+    $sql = $this->sanitizeQuery($sql);
+    if (!$return = $this->connection->query($sql)) {
+      die("Error(".$this->connection->errno."): ".$this->connection->error);
+    }
+    $array = $return->fetch_all($returnType);
+    $return->free();
+    if (count($array)) {
+      return $array;
+    }else{
+      die("No results found in database!\n");
     }
   }
 
