@@ -15,11 +15,15 @@ class Sphinx {
   }
 
   public function getMatches($keywords, $index = 'note_index'){
+    $keywords = $this->db->sanitizeQuery($keywords);
     $findMatches = "SELECT * FROM $index WHERE MATCH ('".$keywords."')";
     $matches = $this->db->getSphinxMatches($findMatches);
     return $matches;
   }
 
+  public function dbClose(){
+    $this->db->close();
+  }
 }
 
 
