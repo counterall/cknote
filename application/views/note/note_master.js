@@ -259,7 +259,7 @@ function createNote(quit, update){
       title: title,
       content: content
     };
-    $.post('create_update.php', dataArray, function(data) {
+    $.post('create_update_ajax.php', dataArray, function(data) {
       if (data) {
         alert(data);
       } else {
@@ -277,7 +277,7 @@ function createNote(quit, update){
       title: title,
       content: content
     };
-    $.post('create_update.php', dataArray, function(data) {
+    $.post('create_update_ajax.php', dataArray, function(data) {
       if (data) {
         alert(data);
       } else {
@@ -326,7 +326,7 @@ function updateNote(quit){
     update: 'true'
   };
 
-  $.post('create_update.php', dataArray, function(data){
+  $.post('create_update_ajax.php', dataArray, function(data){
     if (data) {
       alert(data);
     } else {
