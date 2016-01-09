@@ -8,7 +8,7 @@ spl_autoload_register('myAutoLoad1');
 
 class MainLib {
 
-  private $db;
+  public $db;
 
   public function __construct(){
     $this->db = new MyDB('localhost', 'root', '', 'cknote');
