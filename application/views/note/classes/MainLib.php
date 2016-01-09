@@ -1,6 +1,6 @@
 <?php
 function myAutoLoad1($class){
-  include "$class".".php";
+  include_once "$class".".php";
 }
 
 spl_autoload_register('myAutoLoad1');
@@ -17,7 +17,7 @@ class MainLib {
   public function dbClose(){
     $this->db->close();
   }
-  
+
   public function getCatAndSubCats(){
     $sql = "SELECT category, sub_cat, GROUP_CONCAT(title) AS titles, GROUP_CONCAT(id) AS ids FROM notes GROUP BY CONCAT(category, sub_cat) ORDER BY category ASC";
     $results = $this->db->getQuery($sql);
