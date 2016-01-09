@@ -26,16 +26,15 @@ class MyDB {
   }
 
   //sanitize input query string
-  private function sanitizeQuery($sql){
+  public function sanitizeQuery($sql){
     $sql = trim($sql);
     $sql = stripslashes($sql);
+    $sql = $this->connection->real_escape_string($sql);
     return $sql;
   }
 
   //single sql query which returns resultsets
   public function getQuery($sql, $returnType=MYSQLI_ASSOC){
-    $sql = $this->sanitizeQuery($sql);
-    $sql = $this->connection->real_escape_string($sql);
     if (!$return = $this->connection->query($sql)) {
       die("Error(".$this->connection->errno."): ".$this->connection->error);
     }
@@ -50,8 +49,6 @@ class MyDB {
 
   //single sql query which does not return resultsets
   public function setQuery($sql){
-    $sql = $this->sanitizeQuery($sql);
-    $sql = $this->connection->real_escape_string($sql);
     if (!$return = $this->connection->query($sql)) {
       die("Error(".$this->connection->errno."): ".$this->connection->error);
     }
@@ -59,8 +56,6 @@ class MyDB {
 
   //multiple sql queries which return resultsets
   public function getMultiQuery($sql, $returnType=MYSQLI_ASSOC){
-    $sql = $this->sanitizeQuery($sql);
-    $sql = $this->connection->real_escape_string($sql);
     if ($this->connection->multi_query($sql)) {
       $return = [];
       $n = 0;
@@ -103,7 +98,6 @@ class MyDB {
 
   //for sphinx search only
   public function getSphinxMatches($sql, $returnType=MYSQLI_ASSOC){
-    $sql = $this->sanitizeQuery($sql);
     if (!$return = $this->connection->query($sql)) {
       die("Error(".$this->connection->errno."): ".$this->connection->error);
     }
