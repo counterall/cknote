@@ -1,7 +1,7 @@
 <?php
 
 function myAutoLoad2($class){
-  include "./classes/$class".".php";
+  include_once "./classes/$class".".php";
 }
 
 spl_autoload_register('myAutoLoad2');
