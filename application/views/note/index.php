@@ -1,14 +1,16 @@
 <?php
 
-include_once 'functions.php';
+function myAutoLoad2($class){
+  include "./classes/$class".".php";
+}
 
-connectDB();
+spl_autoload_register('myAutoLoad2');
 
-$menuHierarchy = getCatAndSubCats();
-$recentlyUpdated = getRecentUpdateAndMostSearch();
-$mostSearched = getRecentUpdateAndMostSearch(false);
-
-closeDB();
+$main = new MainLib();
+$menuHierarchy = $main->getCatAndSubCats();
+$recentlyUpdated = $main->getRecentUpdateAndMostSearch();
+$mostSearched = $main->getRecentUpdateAndMostSearch(true);
+$main->dbClose();
 ?>
 
 
