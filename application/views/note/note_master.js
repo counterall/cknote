@@ -43,10 +43,10 @@ $(document).ready(function(){
       $('.create-area').slideUp();
       if ($('#back_to_search').is(':visible')){
         $('.search-results').slideDown();
-      }else if (('#back_to_last_post').is(':visible')) {
+      }else if ($('#back_to_last_post').is(':visible')) {
         $('.show-note-area').slideDown;
       }else{
-        $('.list-area').slideUp();
+        $('.list-area').slideDown();
       }
     }else{
       $('#create, #create-quit').show();
