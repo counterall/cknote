@@ -96,19 +96,5 @@ class MyDB {
     }
   }
 
-  //for sphinx search only
-  public function getSphinxMatches($sql, $returnType=MYSQLI_ASSOC){
-    if (!$return = $this->connection->query($sql)) {
-      die("Error(".$this->connection->errno."): ".$this->connection->error);
-    }
-    $array = $return->fetch_all($returnType);
-    $return->free();
-    if (count($array)) {
-      return $array;
-    }else{
-      die("No results found in database!\n");
-    }
-  }
-
 }
 ?>
