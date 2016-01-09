@@ -15,6 +15,8 @@ spl_autoload_register('myAutoLoad4');
 $sphinxSearch = new Sphinx();
 $matches = $sphinxSearch->getMatches($keywords);
 
+$sphinxSearch->dbClose();
+
 $htmlToReturn = '';
 foreach ($matches as $key => $value) {
   $htmlToReturn .= "<div class='list-item'>";
@@ -23,5 +25,7 @@ foreach ($matches as $key => $value) {
   $htmlToReturn .= "<div class='note-id'>".$value['id']."</div></div>";
   $htmlToReturn .= "</div>";
 }
+
 echo $htmlToReturn;
+
 ?>
