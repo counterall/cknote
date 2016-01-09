@@ -15,37 +15,29 @@ class MyDB {
     $this->db = $db;
     $this->port = $port;
 
-    if(!$this->connection = new mysqli()){
-      die("Database initialization failed!\n");
-    }
-    $this->connection->options(MYSQLI_OPT_CONNECT_TIMEOUT, 5);
-  }
-
-  private function connect(){
-    if (!$this->connection->real_connect($this->host, $this->username, $this->passwd, $this->db, $this->port)) {
+    if(!$this->connection = new mysqli($this->host, $this->username, $this->passwd, $this->db, $this->port)){
       die("Error(".$this->connection->connect_errno."): ".$this->connection->connect_error);
     }
   }
 
-  private function close(){
+  public function close(){
     $this->connection->close();
   }
 
-  public function sanitizeQuery($sql){
+  private function sanitizeQuery($sql){
     $sql = trim($sql);
     $sql = stripslashes($sql);
     return $sql;
   }
 
   public function getQuery($sql, $returnType=MYSQLI_ASSOC){
-    $this->connect();
     $sql = $this->sanitizeQuery($sql);
     $sql = $this->connection->real_escape_string($sql);
     if (!$return = $this->connection->query($sql)) {
       die("Error(".$this->connection->errno."): ".$this->connection->error);
     }
-    $this->connection->close();
     $array = $return->fetch_all($returnType);
+    $return->free();
     if (count($array)) {
       return $array;
     }else{
@@ -54,17 +46,14 @@ class MyDB {
   }
 
   public function setQuery($sql){
-    $this->connect();
     $sql = $this->sanitizeQuery($sql);
     $sql = $this->connection->real_escape_string($sql);
     if (!$return = $this->connection->query($sql)) {
       die("Error(".$this->connection->errno."): ".$this->connection->error);
     }
-    $this->connection->close();
   }
 
   public function getMultiQuery($sql, $returnType=MYSQLI_ASSOC){
-    $this->connect();
     $sql = $this->sanitizeQuery($sql);
     $sql = $this->connection->real_escape_string($sql);
     if ($this->connection->multi_query($sql)) {
@@ -91,7 +80,6 @@ class MyDB {
           $continue = false;
         }
       } while ($continue);
-      $this->connection->close();
     }else{
       die("Error(".$this->connection->errno."): ".$this->connection->error);
     }
