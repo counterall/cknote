@@ -1,16 +1,19 @@
 <?php
 
-include_once "functions.php";
-
-connectSphinx();
-
 if (isset($_POST['query'])) {
   $keywords = $_POST['query'];
 }else{
   die('No keywords are received!');
 }
 
-$matches = sphinxQuery($keywords);
+function myAutoLoad4($class){
+  include_once "./classes/$class".".php";
+}
+
+spl_autoload_register('myAutoLoad4');
+
+$sphinxSearch = new Sphinx();
+$matches = $sphinxSearch->getMatches($keywords);
 
 $htmlToReturn = '';
 foreach ($matches as $key => $value) {

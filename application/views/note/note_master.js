@@ -117,7 +117,7 @@ $(document).ready(function(){
       dataArray = {
         query: query
       };
-      $.post('sphinx.php', dataArray, function(data){
+      $.post('sphinx_ajax.php', dataArray, function(data){
         $('.search-results .list-content').html(data);
       })
     }else{
