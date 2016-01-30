@@ -85,8 +85,9 @@ body{
   border: 1px solid #00A8FF;
 }
 
-.menu{
+.left-side .menu{
   padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .category {
