@@ -20,7 +20,7 @@ if (isset($_POST['update'])) {
   }else{
     $sql = "SELECT id FROM notes ORDER BY datetime DESC LIMIT 1";
     $result = $main->db->getQuery($sql);
-    $id = $result['id'];
+    $id = $result[0]['id'];
   }
   $sql = "UPDATE notes SET category = '$category', sub_cat = '$sub_cat', content = '$content', title = '$title', datetime = NOW() WHERE id = $id";
   $main->db->setQuery($sql);
