@@ -143,8 +143,8 @@ $(document).ready(function(){
     //replicate the note id to the edit form
     $('.edit-note-form .note-id').text($('.show-note-form .note-id').text());
     //prepare meta data of a note to be edited
-    $('#update-note-cat').val($('#note-meta-cat').text());
-    $('#update-note-sub-cat').val($('#note-meta-sub-cat').text());
+    $('#update-note-cat').val($('#note-meta-cat a').text());
+    $('#update-note-sub-cat').val($('#note-meta-sub-cat a').text());
     $('#update-note-meta').show();
     $('#update-note-title').val($('#show-note-title').text()).show();
     //hide 'show' page
@@ -162,8 +162,8 @@ $(document).ready(function(){
     content = editor2.getData();
     $('#show-note-content').html(content);
     $('#show-note-title').text(title);
-    $('#note-meta-cat').text(category);
-    $('#note-meta-sub-cat').text(sub_cat);
+    $('#note-meta-cat a').text(category);
+    $('#note-meta-sub-cat a').text(sub_cat);
     // in case new note is opened during editing, we need to recover the note id
     $('.show-note-form .note-id').text($('.edit-note-form .note-id').text());
     $('#show-note-content ul').css('padding-left','40px');
@@ -340,8 +340,8 @@ function updateNote(quit){
 
   $('#show-note-content').html(content);
   $('#show-note-title').text(title);
-  $('#note-meta-cat').text(category);
-  $('#note-meta-sub-cat').text(sub_cat);
+  $('#note-meta-cat a').text(category);
+  $('#note-meta-sub-cat a').text(sub_cat);
   // in case new note is opened during editing, we need to recover the note id
   $('.show-note-form .note-id').text($('.edit-note-form .note-id').text());
   $('#show-note-content ul').css('padding-left','40px');
