@@ -334,6 +334,11 @@ body{
   margin-left: auto;
   margin-right: auto;
 }
+/*to wrap the text inside pre block*/
+.show-note-area pre{
+  word-wrap: break-word;
+  white-space: pre-wrap;
+}
 
 #note-meta-cat a, #note-meta-sub-cat a{
   text-decoration: none;
