@@ -11,7 +11,7 @@ class MainLib {
   public $db;
 
   public function __construct(){
-    $this->db = new MyDB('localhost', 'root', '', 'cknote');
+    $this->db = new MyDB('localhost', 'root', 'mj23kb8i3', 'cknote');
   }
 
   public function dbClose(){
