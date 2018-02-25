@@ -1,10 +1,6 @@
 <?php
 
-function myAutoLoad5($class){
-  include_once "./classes/$class".".php";
-}
-
-spl_autoload_register('myAutoLoad5');
+require_once "./autoload.php";
 
 $main = new MainLib();
 

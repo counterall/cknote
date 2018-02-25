@@ -1,16 +1,12 @@
 <?php
 
+require_once "./autoload.php";
+
 if (isset($_POST['query'])) {
   $keywords = $_POST['query'];
 }else{
   die('No keywords are received!');
 }
-
-function myAutoLoad4($class){
-  include_once "./classes/$class".".php";
-}
-
-spl_autoload_register('myAutoLoad4');
 
 $sphinxSearch = new Sphinx();
 $matches = $sphinxSearch->getMatches($keywords);
