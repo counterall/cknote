@@ -11,7 +11,7 @@ class Sphinx {
   private $db;
 
   public function __construct(){
-    $this->db = new MyDB('127.0.0.1', '', '', '', 9306);
+    $this->db = new MyDB('note_sphinxsearch', '', '', '', 9306);
   }
 
   public function getMatches($keywords, $index = 'note_index'){

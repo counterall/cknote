@@ -7,7 +7,7 @@ class MainLib {
   public $db;
 
   public function __construct(){
-    $this->db = new MyDB('localhost', 'root', 'mj23kb8i3', 'cknote');
+    $this->db = new MyDB('note_db', 'note', 'note', 'note');
   }
 
   public function dbClose(){
@@ -15,7 +15,7 @@ class MainLib {
   }
 
   public function getCatAndSubCats(){
-    $sql = "SELECT category, sub_cat, GROUP_CONCAT(title) AS titles, GROUP_CONCAT(id) AS ids FROM notes GROUP BY CONCAT(category, sub_cat) ORDER BY category ASC";
+    $sql = "SELECT category, sub_cat, GROUP_CONCAT(title) AS titles, GROUP_CONCAT(id) AS ids FROM notes GROUP BY category, sub_cat ORDER BY category ASC";
     $results = $this->db->getQuery($sql);
     $categoryArray = [];
     foreach ($results as $row => $value) {
