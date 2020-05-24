@@ -1,11 +1,4 @@
 <?php
-function myAutoLoad3($class){
-  include_once "$class".".php";
-}
-
-spl_autoload_register('myAutoLoad3');
-
-
 class Sphinx {
 
   private $db;
